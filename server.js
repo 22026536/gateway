@@ -5,10 +5,23 @@ const cookieParser = require ('cookie-parser');
 const { json } = express;
 const app = express();
 
+function corMw(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*'); // Cho phép tất cả các nguồn
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true'); // Cho phép gửi cookie
+  if (req.method === 'OPTIONS') {
+      return res.sendStatus(200); // Xử lý nhanh cho preflight request
+  }
+  next();
+}
+app.use(corMw);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(json());
 app.set('trust proxy', 1);
 app.use(cookieParser());
+app.use(cors())
 
 app.use("/user", proxy("https://animetangouserservice.onrender.com", {
   proxyReqPathResolver: (req) => {
