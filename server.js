@@ -5,9 +5,13 @@ const proxy = require("express-http-proxy");
 const app = express();
 
 app.use(cors({
-  origin: 'https://anime-fawn-five.vercel.app', // Chỉ định frontend được phép
+  origin: '*', // Chỉ định frontend được phép,
+  methods: '*'
 }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.set('trust proxy', 1);
+app.use(cookieParser());
 
 app.use("/user", proxy("https://animetangouserservice.onrender.com", {
   proxyReqPathResolver: (req) => {
