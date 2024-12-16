@@ -9,7 +9,7 @@ const app = express();
 const corsOptions = {
   origin: ['https://anime-fawn-five.vercel.app', 'http://localhost:5173'], // Allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+  allowedHeaders: ['Content-Type'], // Allowed headers
   credentials: true, // Allow credentials (cookies, etc.)
 };
 app.use(cors(corsOptions));
