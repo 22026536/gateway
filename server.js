@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const proxy = require("express-http-proxy");
+const cookieParser = require ('cookie-parser');
 const { json } = express;
 const app = express();
 
