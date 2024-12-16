@@ -4,7 +4,9 @@ const proxy = require("express-http-proxy");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: '*', // Chỉ định frontend được phép
+}));
 app.use(express.json());
 
 app.use("/user", proxy("https://animetangouserservice.onrender.com", {
