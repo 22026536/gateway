@@ -13,7 +13,6 @@ function corMw(req, res, next) {
   } else {
     res.header('Access-Control-Allow-Origin', '*'); // Dự phòng nếu không tìm thấy origin
   }
-  res.header('Access-Control-Allow-Origin', origin); // Cho phép tất cả các nguồn
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true'); // Cho phép gửi cookie
