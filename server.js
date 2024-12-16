@@ -7,13 +7,48 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/user", proxy("https://animetangouserservice.onrender.com/user"));
-app.use("/anime", proxy("https://animetangoanimeservice.onrender.com/anime"));
-app.use("/useranime", proxy("https://animetangouseranimeservice.onrender.com/useranime"));
-app.use("/admin", proxy("https://animetangoadminservice.onrender.com/admin"));
-app.use("/knn", proxy("https://animetangoknnservice.onrender.com"));
-app.use("/decisiontree", proxy("https://animetangodecisiontreeservice.onrender.com"));
-app.use("/naivebayes", proxy("https://animetangonaivebayesservice.onrender.com"));
+app.use("/user", proxy("https://animetangouserservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
+app.use("/anime", proxy("https://animetangoanimeservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
+app.use("/useranime", proxy("https://animetangouseranimeservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
+app.use("/admin", proxy("https://animetangoadminservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
+app.use("/knn", proxy("https://animetangoknnservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
+app.use("/decisiontree", proxy("https://animetangodecisiontreeservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
+app.use("/naivebayes", proxy("https://animetangonaivebayesservice.onrender.com", {
+  proxyReqPathResolver: (req) => {
+    // Giữ nguyên "/admin" trong URL đích
+    return req.originalUrl; // Đây là URL yêu cầu ban đầu, bao gồm cả /admin
+  }
+}));
 
 
 const PORT = 3004;
