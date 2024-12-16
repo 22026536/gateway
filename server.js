@@ -6,7 +6,7 @@ const app = express();
 
 app.use(cors({
   origin: '*', // Chỉ định frontend được phép
-  methods: ['GET', 'POST'], // Cho phép các phương thức GET và POST
+  methods: '*', // Cho phép các phương thức GET và POST
 }));
 
 app.use(express.urlencoded({ extended: true }));
@@ -23,4 +23,5 @@ app.use("/decisiontree", proxy("https://animeTangoDecisionTreeService.onrender.c
 app.use("/naivebayes", proxy("https://animeTangoNaiveBayesService.onrender.com"));
 
 
-
+const PORT = 3004;
+app.listen(PORT, () => console.log(`Server is running at port: ${PORT}`));
