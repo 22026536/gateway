@@ -1,18 +1,11 @@
-import cookieParser from 'cookie-parser';
-import cors from "cors";
-import express, { json } from 'express';
-import proxy from "express-http-proxy";
+const express = require("express");
+const cors = require("cors");
+const proxy = require("express-http-proxy");
+
 const app = express();
 
-app.use(cors({
-  origin: '*', // Chỉ định frontend được phép
-  methods: '*', // Cho phép các phương thức GET và POST
-}));
-
-app.use(express.urlencoded({ extended: true }));
-app.use(json());
-app.set('trust proxy', 1);
-app.use(cookieParser());
+app.use(cors());
+app.use(express.json());
 
 app.use("/user", proxy("https://animetangouserservice.onrender.com"));
 app.use("/anime", proxy("https://animetangoanimeservice.onrender.com"));
