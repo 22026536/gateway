@@ -6,7 +6,14 @@ const { json } = express;
 const app = express();
 
 function corMw(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*'); // Cho phép tất cả các nguồn
+  const allowedOrigins = ['https://anime-fawn-five.vercel.app', 'https://localhost:5173'];
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin); // Chỉ cho phép các origin trong danh sách
+  } else {
+    res.header('Access-Control-Allow-Origin', '*'); // Dự phòng nếu không tìm thấy origin
+  }
+  res.header('Access-Control-Allow-Origin', origin); // Cho phép tất cả các nguồn
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true'); // Cho phép gửi cookie
