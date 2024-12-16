@@ -5,10 +5,6 @@ const cookieParser = require ('cookie-parser');
 const { json } = express;
 const app = express();
 
-app.use(cors({
-  origin: '*', // Chỉ định frontend được phép,
-  methods: '*'
-}));
 app.use(express.urlencoded({ extended: true }));
 app.use(json());
 app.set('trust proxy', 1);
