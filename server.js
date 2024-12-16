@@ -5,7 +5,7 @@ const proxy = require("express-http-proxy");
 const app = express();
 
 app.use(cors({
-  origin: '*', // Chỉ định frontend được phép
+  origin: 'https://anime-fawn-five.vercel.app', // Chỉ định frontend được phép
 }));
 app.use(express.json());
 
