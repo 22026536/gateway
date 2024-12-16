@@ -5,16 +5,18 @@ const cookieParser = require ('cookie-parser');
 const { json } = express;
 const app = express();
 
-// Configure CORS
-const corsOptions = {
-  origin: ['https://anime-fawn-five.vercel.app', 'http://localhost:5173'], // Allowed origins
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-  allowedHeaders: ['Content-Type'], // Allowed headers
-  credentials: true, // Allow credentials (cookies, etc.)
-};
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight requests
-
+function corMw(req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*'); // Cho phép tất cả các nguồn
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true'); // Cho phép gửi cookie
+  if (req.method === 'OPTIONS') {
+      return res.sendStatus(200); // Xử lý nhanh cho preflight request
+  }
+  next();
+}
+app.use(corMw);
+app.use(cors())
 
 app.use(express.urlencoded({ extended: true }));
 app.use(json());
